@@ -18,14 +18,12 @@ import acme.client.components.validation.ValidMoment;
 import acme.client.components.validation.ValidMoment.Constraint;
 import acme.client.components.validation.ValidUrl;
 import acme.realms.Inventor;
-import acme.validation.ValidInvention;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
-@ValidInvention
 public class Invention extends AbstractEntity {
 
 	private final InventionRepository	repository;
