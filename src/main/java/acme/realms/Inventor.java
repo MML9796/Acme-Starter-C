@@ -22,12 +22,12 @@ public class Inventor extends AbstractRole {
 	// Attributes -------------------------------------------------------------
 
 	@Mandatory
-	@ValidText
+	//@ValidText
 	@Column
 	private String				bio;
 
 	@Mandatory
-	@ValidText
+	//@ValidText
 	@Column
 	private String				keyWords;
 

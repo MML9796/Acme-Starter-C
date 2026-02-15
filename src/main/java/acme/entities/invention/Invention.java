@@ -4,10 +4,10 @@ package acme.entities.invention;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.basis.AbstractEntity;
 import acme.client.components.datatypes.Moment;
@@ -26,48 +26,48 @@ import lombok.Setter;
 @Setter
 public class Invention extends AbstractEntity {
 
-	private final InventionRepository	repository;
+	@Transient
+	@Autowired
+	private InventionRepository	repository;
 
 	// Serialisation version --------------------------------------------------
 
-	private static final long			serialVersionUID	= 1L;
+	private static final long	serialVersionUID	= 1L;
 
 	// Attributes -------------------------------------------------------------
 
 	@Mandatory
-	@ValidTicker
+	//@ValidTicker
 	@Column(unique = true)
-	private String						ticker;
+	private String				ticker;
 
 	@Mandatory
-	@ValidHeader
+	//@ValidHeader
 	@Column
-	private String						name;
+	private String				name;
 
 	@Mandatory
-	@ValidText
+	//@ValidText
 	@Column
-	private String						description;
+	private String				description;
 
 	@Mandatory
 	@ValidMoment(constraint = Constraint.ENFORCE_FUTURE)
-	@Temporal(TemporalType.TIMESTAMP)
-	private Moment						startMoment;
+	private Moment				startMoment;
 
 	@Mandatory
 	@ValidMoment(constraint = Constraint.ENFORCE_FUTURE)
-	@Temporal(TemporalType.TIMESTAMP)
-	private Moment						endMoment;
+	private Moment				endMoment;
 
 	@Optional
 	@ValidUrl
 	@Column
-	private String						moreInfo;
+	private String				moreInfo;
 
 	@Mandatory
 	@Valid
 	@Column
-	private Boolean						draftMode;
+	private Boolean				draftMode;
 
 	// Derived attributes -----------------------------------------------------
 
@@ -82,10 +82,12 @@ public class Invention extends AbstractEntity {
 
 	@Transient
 	public Money getCost() {
-		Money suma = this.repository.getSumCostsPartsByInvention(this.getId());
-		if (!"EUR".equals(suma.getCurrency()))
-			throw new IllegalStateException("Only Euros are accepted for cost.");
-		return suma;
+
+		Double sum = this.repository.getSumCostsPartsByInvention(this.getId());
+		Money resultado = new Money();
+		resultado.setAmount(sum);
+		resultado.setCurrency("EUR");
+		return resultado;
 	}
 
 	// Relationships ----------------------------------------------------------

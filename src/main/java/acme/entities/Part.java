@@ -26,12 +26,12 @@ public class Part extends AbstractEntity {
 	// Attributes -------------------------------------------------------------
 
 	@Mandatory
-	@ValidHeader
+	//@ValidHeader
 	@Column
 	private String				name;
 
 	@Mandatory
-	@ValidText
+	//@ValidText
 	@Column
 	private String				description;
 
