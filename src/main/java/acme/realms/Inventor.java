@@ -9,6 +9,7 @@ import acme.client.components.basis.AbstractRole;
 import acme.client.components.validation.Mandatory;
 import lombok.Getter;
 import lombok.Setter;
+import validation.ValidText;
 
 @Entity
 @Getter
@@ -22,12 +23,12 @@ public class Inventor extends AbstractRole {
 	// Attributes -------------------------------------------------------------
 
 	@Mandatory
-	//@ValidText
+	@ValidText
 	@Column
 	private String				bio;
 
 	@Mandatory
-	//@ValidText
+	@ValidText
 	@Column
 	private String				keyWords;
 
