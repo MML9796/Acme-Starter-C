@@ -11,10 +11,10 @@ import acme.client.components.datatypes.Money;
 import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.ValidMoney;
 import acme.entities.sponsorship.Sponsorship;
+import acme.validation.ValidHeader;
+import acme.validation.ValidText;
 import lombok.Getter;
 import lombok.Setter;
-import validation.ValidHeader;
-import validation.ValidText;
 
 @Entity
 @Getter
