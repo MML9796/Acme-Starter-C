@@ -1,10 +1,10 @@
 
-package validators;
+package acme.validators;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import validation.ValidText;
+import acme.validation.ValidText;
 
 public class ValidTextValidator implements ConstraintValidator<ValidText, String> {
 

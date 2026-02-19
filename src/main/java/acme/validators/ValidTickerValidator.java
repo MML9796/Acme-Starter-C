@@ -1,10 +1,10 @@
 
-package validators;
+package acme.validators;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import validation.ValidTicker;
+import acme.validation.ValidTicker;
 
 public class ValidTickerValidator implements ConstraintValidator<ValidTicker, String> {
 

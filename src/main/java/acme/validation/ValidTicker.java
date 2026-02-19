@@ -1,5 +1,5 @@
 
-package validation;
+package acme.validation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -9,16 +9,17 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import validators.ValidHeaderValidator;
+import acme.validators.ValidTickerValidator;
 
 @Target({
 	ElementType.FIELD, ElementType.METHOD
 })
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = ValidHeaderValidator.class)
-public @interface ValidHeader {
+@Constraint(validatedBy = ValidTickerValidator.class)
 
-	String message() default "El encabezado debe tener entre 1 y 75 caracteres y no estar vacío";
+public @interface ValidTicker {
+
+	String message() default "El texto debe cumplir el patron AB12-ABCDE y no estar vacío";
 
 	Class<?>[] groups() default {};
 	Class<? extends Payload>[] payload() default {};

@@ -21,11 +21,11 @@ import acme.client.components.validation.ValidMoment;
 import acme.client.components.validation.ValidMoment.Constraint;
 import acme.client.components.validation.ValidUrl;
 import acme.realms.Inventor;
+import acme.validation.ValidHeader;
+import acme.validation.ValidText;
+import acme.validation.ValidTicker;
 import lombok.Getter;
 import lombok.Setter;
-import validation.ValidHeader;
-import validation.ValidText;
-import validation.ValidTicker;
 
 @Entity
 @Getter

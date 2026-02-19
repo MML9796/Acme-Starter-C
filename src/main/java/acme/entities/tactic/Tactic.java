@@ -10,10 +10,10 @@ import acme.client.components.basis.AbstractEntity;
 import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.ValidScore;
 import acme.entities.strategy.Strategy;
+import acme.validation.ValidHeader;
+import acme.validation.ValidText;
 import lombok.Getter;
 import lombok.Setter;
-import validation.ValidHeader;
-import validation.ValidText;
 
 @Entity
 @Getter

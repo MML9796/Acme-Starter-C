@@ -7,9 +7,9 @@ import javax.validation.Valid;
 
 import acme.client.components.basis.AbstractRole;
 import acme.client.components.validation.Mandatory;
+import acme.validation.ValidText;
 import lombok.Getter;
 import lombok.Setter;
-import validation.ValidText;
 
 @Entity
 @Getter
