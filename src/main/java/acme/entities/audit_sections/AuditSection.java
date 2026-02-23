@@ -11,10 +11,10 @@ import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.ValidNumber;
 import acme.datatypes.SectionKind;
 import acme.entities.audit_reports.AuditReport;
+import acme.validation.ValidHeader;
+import acme.validation.ValidText;
 import lombok.Getter;
 import lombok.Setter;
-import validation.ValidHeader;
-import validation.ValidText;
 
 @Entity
 @Getter

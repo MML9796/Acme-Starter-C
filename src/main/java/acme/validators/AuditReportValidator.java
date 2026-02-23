@@ -1,5 +1,5 @@
 
-package validators;
+package acme.validators;
 
 import javax.validation.ConstraintValidatorContext;
 
@@ -10,7 +10,7 @@ import acme.client.components.validation.Validator;
 import acme.client.helpers.MomentHelper;
 import acme.entities.audit_reports.AuditReport;
 import acme.entities.audit_reports.AuditReportRepository;
-import validation.ValidAuditReport;
+import acme.validation.ValidAuditReport;
 
 @Validator
 public class AuditReportValidator extends AbstractValidator<ValidAuditReport, AuditReport> {
