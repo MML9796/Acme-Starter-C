@@ -31,25 +31,31 @@ public class CampaignValidator extends AbstractValidator<ValidCampaign, Campaign
 			result = true;
 		else {
 			if (!campaign.getDraftMode()) {
-				boolean oneMilestone;
-				Integer totalMilestones = this.repository.totalMilestoneByCamapaignId(campaign.getId());
-				oneMilestone = totalMilestones == null || totalMilestones >= 1;
-				super.state(context, oneMilestone, "milestone", "acme.validation.campaign.one-milestone.message");
-
-				if (campaign.getEndMoment() != null && campaign.getStartMoment() != null) {
-					boolean timeCorrect;
-					timeCorrect = campaign.getEndMoment().after(campaign.getStartMoment());
-					super.state(context, timeCorrect, "endMoment", "acme.validation.campaign.invalid-time-interval.message ");
+				{
+					boolean oneMilestone;
+					Integer totalMilestones = this.repository.totalMilestoneByCamapaignId(campaign.getId());
+					oneMilestone = totalMilestones == null || totalMilestones >= 1;
+					super.state(context, oneMilestone, "milestone", "acme.validation.campaign.one-milestone.message");
 
 				}
-				boolean uniqueCampaing;
-				Campaign existingCampaing;
+				{
+					if (campaign.getEndMoment() != null && campaign.getStartMoment() != null) {
+						boolean timeCorrect;
+						timeCorrect = campaign.getEndMoment().after(campaign.getStartMoment());
+						super.state(context, timeCorrect, "endMoment", "acme.validation.campaign.invalid-time-interval.message ");
 
-				existingCampaing = this.repository.findCampaignByTicker(campaign.getTicker());
-				uniqueCampaing = existingCampaing == null || existingCampaing.equals(campaign);
+					}
+				}
+				{
+					boolean uniqueCampaing;
+					Campaign existingCampaing;
 
-				super.state(context, uniqueCampaing, "ticker", "acme.validation.campaign.duplicated-ticker.message");
+					existingCampaing = this.repository.findCampaignByTicker(campaign.getTicker());
+					uniqueCampaing = existingCampaing == null || existingCampaing.equals(campaign);
 
+					super.state(context, uniqueCampaing, "ticker", "acme.validation.campaign.duplicated-ticker.message");
+
+				}
 			}
 			result = !super.hasErrors(context);
 		}
