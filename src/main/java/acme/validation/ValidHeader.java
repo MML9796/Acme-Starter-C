@@ -18,7 +18,7 @@ import acme.validators.ValidHeaderValidator;
 @Constraint(validatedBy = ValidHeaderValidator.class)
 public @interface ValidHeader {
 
-	String message() default "El encabezado debe tener entre 1 y 75 caracteres y no estar vacío";
+	String message() default "{acme.validation.header.invalid.message}";
 
 	Class<?>[] groups() default {};
 	Class<? extends Payload>[] payload() default {};
