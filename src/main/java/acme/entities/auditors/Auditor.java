@@ -9,6 +9,7 @@ import acme.client.components.basis.AbstractRole;
 import acme.client.components.validation.Mandatory;
 import lombok.Getter;
 import lombok.Setter;
+import validation.ValidHeader;
 
 @Entity
 @Getter
@@ -22,12 +23,12 @@ public class Auditor extends AbstractRole {
 	// Attributes -------------------------------------------------------------
 
 	@Mandatory
-	@Valid
+	@ValidHeader
 	@Column
 	private String				firm;
 
 	@Mandatory
-	@Valid
+	@ValidHeader
 	@Column
 	private String				highlights;
 

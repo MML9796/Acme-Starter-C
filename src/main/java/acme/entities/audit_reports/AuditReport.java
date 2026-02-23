@@ -1,5 +1,5 @@
 
-package acme.entities.audits.reports;
+package acme.entities.audit_reports;
 
 import java.util.Date;
 
@@ -11,73 +11,95 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import acme.client.components.basis.AbstractEntity;
 import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidMoment;
 import acme.client.components.validation.ValidMoment.Constraint;
 import acme.client.components.validation.ValidUrl;
+import acme.client.helpers.MomentHelper;
 import acme.entities.auditors.Auditor;
 import lombok.Getter;
 import lombok.Setter;
+import validation.ValidAuditReport;
+import validation.ValidHeader;
+import validation.ValidText;
+import validation.ValidTicker;
 
 @Entity
 @Getter
 @Setter
+@ValidAuditReport
 public class AuditReport extends AbstractEntity {
 
 	// Serialisation version --------------------------------------------------
 
-	private static final long	serialVersionUID	= 1L;
+	private static final long		serialVersionUID	= 1L;
 
 	// Attributes -------------------------------------------------------------
 
 	@Mandatory
-	@Valid
+	@ValidTicker
 	@Column(unique = true)
-	private String				ticker;
+	private String					ticker;
 
 	@Mandatory
-	@Valid
+	@ValidHeader
 	@Column
-	private String				name;
+	private String					name;
 
 	@Mandatory
-	@Valid
+	@ValidText
 	@Column
-	private String				description;
+	private String					description;
 
 	@Mandatory
 	@ValidMoment(constraint = Constraint.ENFORCE_FUTURE)
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date				startMoment;
+	private Date					startMoment;
 
 	@Mandatory
 	@ValidMoment(constraint = Constraint.ENFORCE_FUTURE)
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date				endMoment;
+	private Date					endMoment;
 
 	@Optional
 	@ValidUrl
 	@Column
-	private String				moreInfo;
+	private String					moreInfo;
 
 	@Mandatory
 	@Valid
 	@Column
-	private Boolean				draftMode;
+	private Boolean					draftMode;
 
 	// Derived attributes -----------------------------------------------------
+
+	@Transient
+	@Autowired
+	private AuditReportRepository	repository;
 
 
 	@Transient
 	public Double getMonthsActive() {
-		return null;
+		Double result;
+
+		result = MomentHelper.computeDuration(this.getStartMoment(), this.getEndMoment()).toDays() / 30.0;
+
+		return result;
 	}
 
 	@Transient
 	public Integer getHours() {
-		return null;
+		Integer result;
+		Integer wrapper;
+
+		wrapper = this.repository.computeHours(this.getId());
+		result = wrapper == null ? 0 : wrapper.intValue();
+
+		return result;
 	}
 
 	// Relationships ----------------------------------------------------------

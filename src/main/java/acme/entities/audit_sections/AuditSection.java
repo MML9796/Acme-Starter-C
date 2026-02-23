@@ -1,5 +1,5 @@
 
-package acme.entities.audits.sections;
+package acme.entities.audit_sections;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,9 +10,11 @@ import acme.client.components.basis.AbstractEntity;
 import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.ValidNumber;
 import acme.datatypes.SectionKind;
-import acme.entities.audits.reports.AuditReport;
+import acme.entities.audit_reports.AuditReport;
 import lombok.Getter;
 import lombok.Setter;
+import validation.ValidHeader;
+import validation.ValidText;
 
 @Entity
 @Getter
@@ -26,12 +28,12 @@ public class AuditSection extends AbstractEntity {
 	// Attributes -------------------------------------------------------------
 
 	@Mandatory
-	@Valid
+	@ValidHeader
 	@Column
 	private String				name;
 
 	@Mandatory
-	@Valid
+	@ValidText
 	@Column
 	private String				notes;
 
